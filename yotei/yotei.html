@@ -1,0 +1,55 @@
+<meta charset="utf-8" />
+<title>yotei</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: hsl(40, 30%, 85%);
+  }
+
+  textarea,
+  input {
+    color: hsl(40 10% 20%);
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    outline: none;
+    padding: 1rem;
+  }
+
+  textarea {
+    resize: none;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  input,
+  button {
+    align-self: flex-start;
+  }
+
+  .row {
+    display: flex;
+    min-height: 100dvh;
+  }
+</style>
+
+<div class="row" x-data="yotei">
+  <input
+    type="text"
+    x-model="date"
+    @focus="$el.select()"
+    @change="date = toDate(date)"
+    placeholder=""
+  />
+  <input type="text" x-model="text" placeholder="予定" />
+  <button @click="add()">追加</button>
+  <ul>
+    <template x-for="e in sorted">
+      <li x-text="e.date + ' ' + e.text"></li>
+    </template>
+  </ul>
+</div>
+
+<script src="yotei.js"></script>
+<script defer src="alpine.min.js"></script>
